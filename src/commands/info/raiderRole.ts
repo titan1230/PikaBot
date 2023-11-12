@@ -21,7 +21,7 @@ const command: Command = {
         .setColor("Yellow")
         .setFooter({ text: "Want to get rid of the role? Just click the button again!" })
         
-        const channel = message.channel.client.channels.cache.get("889624405083439892") as TextChannel
+        const channel = message.channel.client.channels.cache.get("1172453602044956753") as TextChannel
         channel.send({ embeds: [embed], components: [row] })
         // message.channel.send({ embeds: [embed], components: [row] })
     }   
