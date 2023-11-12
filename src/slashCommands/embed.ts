@@ -86,7 +86,6 @@ const command: SlashCommand = {
         .setColor(options.color.toString() as ColorResolvable)
         .setTitle(options.title.toString())
         .setDescription(options.description.toString())
-        .setAuthor({ name: interaction.client.user?.username || 'Default Name', iconURL: interaction.client.user?.avatarURL() || undefined })
         .setThumbnail(interaction.client.user?.avatarURL() || null)
         .setTimestamp()
         .setFooter({ text: "Test embed message", iconURL: interaction.client.user?.avatarURL() || undefined });

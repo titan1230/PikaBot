@@ -281,6 +281,21 @@ const event: BotEvent = {
                 await interaction.reply({content: `Added role \`${role?.name}\``, ephemeral: true});
                 return;
             }
+
+            // OTHER RANDOM ROLES
+            if (id === "raider") {
+                const role = interaction.guild.roles.cache.find(role => role.id === '1172696602230657095')
+
+                if (interaction.member.roles.cache.get('1172696602230657095')) {
+                    interaction.member.roles.remove(role!)
+                    await interaction.reply({content: `Removed \`${role?.name}\``, ephemeral: true})
+                    return;
+                }
+
+                interaction.member.roles.add(role!)
+                await interaction.reply({content: `Added role \`${role?.name}\``, ephemeral: true});
+                return;
+            }
         } catch (err) {
             console.log(err)
             interaction.reply({content: 'An error occured!', ephemeral: true})
