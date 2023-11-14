@@ -282,11 +282,68 @@ const event: BotEvent = {
                 return;
             }
 
-            // OTHER RANDOM ROLES
+            // POKEMON BOT ROLES
             if (id === "raider") {
                 const role = interaction.guild.roles.cache.find(role => role.id === '1172696602230657095')
 
                 if (interaction.member.roles.cache.get('1172696602230657095')) {
+                    interaction.member.roles.remove(role!)
+                    await interaction.reply({content: `Removed \`${role?.name}\``, ephemeral: true})
+                    return;
+                }
+
+                interaction.member.roles.add(role!)
+                await interaction.reply({content: `Added role \`${role?.name}\``, ephemeral: true});
+                return;
+            }
+
+            if (id === "pkmn-redeem") {
+                const role = interaction.guild.roles.cache.find(role => role.id === '1173909291892232244')
+
+                if (interaction.member.roles.cache.get('1173909291892232244')) {
+                    interaction.member.roles.remove(role!)
+                    await interaction.reply({content: `Removed \`${role?.name}\``, ephemeral: true})
+                    return;
+                }
+
+                interaction.member.roles.add(role!)
+                await interaction.reply({content: `Added role \`${role?.name}\``, ephemeral: true});
+                return;
+            }
+
+            if (id === "pkmn-incense") {
+                const role = interaction.guild.roles.cache.find(role => role.id === '1173909184127967273')
+
+                if (interaction.member.roles.cache.get('1173909184127967273')) {
+                    interaction.member.roles.remove(role!)
+                    await interaction.reply({content: `Removed \`${role?.name}\``, ephemeral: true})
+                    return;
+                }
+
+                interaction.member.roles.add(role!)
+                await interaction.reply({content: `Added role \`${role?.name}\``, ephemeral: true});
+                return;
+            }
+
+            // POKETWO ROLES
+            if (id === "pk2-redeem") {
+                const role = interaction.guild.roles.cache.find(role => role.id === '1173909386058534993')
+
+                if (interaction.member.roles.cache.get('1173909386058534993')) {
+                    interaction.member.roles.remove(role!)
+                    await interaction.reply({content: `Removed \`${role?.name}\``, ephemeral: true})
+                    return;
+                }
+
+                interaction.member.roles.add(role!)
+                await interaction.reply({content: `Added role \`${role?.name}\``, ephemeral: true});
+                return;
+            }
+
+            if (id === "pk2-incense") {
+                const role = interaction.guild.roles.cache.find(role => role.id === '1173909345726119976')
+
+                if (interaction.member.roles.cache.get('1173909345726119976')) {
                     interaction.member.roles.remove(role!)
                     await interaction.reply({content: `Removed \`${role?.name}\``, ephemeral: true})
                     return;
