@@ -17,7 +17,7 @@ const command: Command = {
         try {
             conn = await pool.getConnection();
 
-            const result = await conn.query(`SELECT * FROM WARN WHERE warn_ID`, [args[1]]);
+            const result = await conn.query(`SELECT * FROM WARN WHERE warn_ID=?`, [args[1]]);
             if (!result[0]) return message.reply("No warn found for corresponding ID.");
 
             const embed = new EmbedBuilder()
