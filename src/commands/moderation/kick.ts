@@ -3,13 +3,9 @@ import { Command } from "../../types";
 
 const command: Command = {
     name: "kick",
-    permissions: [],
+    permissions: [PermissionFlagsBits.KickMembers],
     aliases: [],
     execute: async function (message: Message<boolean>, args: string[]) {
-
-        const hasRole = message.member!.roles.cache.find(role => role.id === "719633781371306135");
-
-        if (!hasRole) return message.channel.send("You don't have permission to use this command.");
         
         if (!args[1]) return message.channel.send("Please mention a user to kick.");
         const user = message.mentions.members!.first() || await message.guild!.members.fetch(args[1]).catch(() => null);

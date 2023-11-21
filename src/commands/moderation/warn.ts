@@ -4,9 +4,13 @@ import { pool } from "../../clients/db";
 
 const command: Command = {
     name: "warn",
-    permissions: [PermissionFlagsBits.BanMembers],
+    permissions: [],
     aliases: [],
     execute: async function (message: Message<boolean>, args: string[]) {
+
+        const hasRole = message.member!.roles.cache.find(role => role.id === "719633781371306135");
+        if (!hasRole) return message.channel.send("You don't have permission to use this command.");
+
         if (!args[1]) return message.reply("Please mention a user to warn.");
         
         const user = message.mentions.members?.first() || await message.guild?.members.fetch(args[1]).catch(() => null);
