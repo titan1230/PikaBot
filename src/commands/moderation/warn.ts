@@ -19,7 +19,7 @@ const command: Command = {
         if (user.user.bot) return message.reply("I don't warn my own kind, uwu~");
         if (user.id === process.env.CLIENT_ID) return message.reply("Are you a fucking idiot?, uwu~");
         if (user.id === "462203190298017793") return message.reply("I don't betray my master, uwu~");
-        if (user.id === message.author.id) return message.reply("You can't ban yourself...");
+        if (user.id === message.author.id) return message.reply("You can't warn yourself...");
 
         const reason = args.slice(2).join(" ") || "No reason provided.";
 
