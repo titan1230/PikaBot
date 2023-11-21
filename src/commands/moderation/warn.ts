@@ -23,7 +23,7 @@ const command: Command = {
         const no_btn:ButtonBuilder = new ButtonBuilder().setCustomId("no").setLabel("No").setStyle(ButtonStyle.Danger).setEmoji("❌");
 
         const row:any = new ActionRowBuilder().addComponents(yes_btn, no_btn);
-        const embed = new EmbedBuilder().setDescription("```\nDo you want to ban" + user.user.tag + "?\n\nReason: "+ reason +"\n```").setColor("Red").setTimestamp();
+        const embed = new EmbedBuilder().setDescription("```\nDo you want to warn " + user.user.tag + "?\n\nReason: "+ reason +"\n```").setColor("Red").setTimestamp();
 
         await message.channel.send({ embeds:[embed], components: [row]});
 
