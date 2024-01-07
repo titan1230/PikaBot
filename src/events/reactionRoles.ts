@@ -353,6 +353,49 @@ const event: BotEvent = {
                 await interaction.reply({content: `Added role \`${role?.name}\``, ephemeral: true});
                 return;
             }
+
+            // QUICK GIVEAWAY
+            if (id === "quick-myuu") {
+                const role = interaction.guild.roles.cache.find(role => role.id === '1188388890868985896')
+
+                if (interaction.member.roles.cache.get('1188388890868985896')) {
+                    interaction.member.roles.remove(role!)
+                    await interaction.reply({content: `Removed \`${role?.name}\``, ephemeral: true})
+                    return;
+                }
+
+                interaction.member.roles.add(role!)
+                await interaction.reply({content: `Added role \`${role?.name}\``, ephemeral: true});
+                return;
+            }
+
+            if (id === "quick-pkmn") {
+                const role = interaction.guild.roles.cache.find(role => role.id === '1192498310553014343')
+
+                if (interaction.member.roles.cache.get('1192498310553014343')) {
+                    interaction.member.roles.remove(role!)
+                    await interaction.reply({content: `Removed \`${role?.name}\``, ephemeral: true})
+                    return;
+                }
+
+                interaction.member.roles.add(role!)
+                await interaction.reply({content: `Added role \`${role?.name}\``, ephemeral: true});
+                return;
+            }
+
+            if (id === "quick-pk2") {
+                const role = interaction.guild.roles.cache.find(role => role.id === '1192498280265961605')
+
+                if (interaction.member.roles.cache.get('1192498280265961605')) {
+                    interaction.member.roles.remove(role!)
+                    await interaction.reply({content: `Removed \`${role?.name}\``, ephemeral: true})
+                    return;
+                }
+
+                interaction.member.roles.add(role!)
+                await interaction.reply({content: `Added role \`${role?.name}\``, ephemeral: true});
+                return;
+            }
         } catch (err) {
             console.log(err)
             interaction.reply({content: 'An error occured!', ephemeral: true})
