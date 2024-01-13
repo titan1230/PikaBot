@@ -33,8 +33,11 @@ declare global {
             TOKEN: string,
             CLIENT_ID: string,
             PREFIX: string,
-            MONGO_URI: string,
-            MONGO_DATABASE_NAME: string
+            CHANNEL_ID: string,
+            MESSAGE_ID: string,
+            GUILD_ID: string,
+            ARCHIVE_CATEGORY_ID: string,
+            PASS: string,        
         }
     }
 }
