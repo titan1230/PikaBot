@@ -37,27 +37,31 @@ export const sendTimedMessage = (message: string, channel: TextChannel, duration
 }
 
 export function readCommands(commandsDir: any, client: any) {
-    const commands:Command[] = [];
-  
-    function readFilesInDirectory(directory:any ) {
-      const files = readdirSync(directory);
-  
-      for (const file of files) {
-        const filePath = join(directory, file);
-        const fileStat = statSync(filePath);
-  
-        if (fileStat.isDirectory()) {
-          // If it's a sub-directory, recursively read files in that directory
-          readFilesInDirectory(filePath);
-        } else if (file.endsWith('.js')) {
-          // If it's a .js file, require and add it as a command
-          const command = require(filePath).default;
-          commands.push(command);
-          client.commands.set(command.name, command);
+    const commands: Command[] = [];
+
+    function readFilesInDirectory(directory: any) {
+        const files = readdirSync(directory);
+
+        for (const file of files) {
+            const filePath = join(directory, file);
+            const fileStat = statSync(filePath);
+
+            if (fileStat.isDirectory()) {
+                // If it's a sub-directory, recursively read files in that directory
+                readFilesInDirectory(filePath);
+            } else if (file.endsWith('.js')) {
+                // If it's a .js file, require and add it as a command
+                const command = require(filePath).default;
+                commands.push(command);
+                client.commands.set(command.name, command);
+            }
         }
-      }
     }
-  
+
     readFilesInDirectory(commandsDir);
     return commands;
+}
+
+export function getRandomValue(max: number, min: number) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
