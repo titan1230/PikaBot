@@ -9,7 +9,6 @@ const command: Command = {
     execute: async function (message, args) {
 
         const embeds: EmbedBuilder[] = [];
-        const embed = new EmbedBuilder().setTitle("Leaderboard").setColor("Yellow");
 
         const next = new ButtonBuilder().setCustomId("next").setLabel("Next").setStyle(ButtonStyle.Secondary);
         const prev = new ButtonBuilder().setCustomId("prev").setLabel("Previous").setStyle(ButtonStyle.Secondary);
@@ -35,6 +34,8 @@ const command: Command = {
                     }
                 }
             }
+
+            console.log(embeds)
 
             let page = 1;
 
