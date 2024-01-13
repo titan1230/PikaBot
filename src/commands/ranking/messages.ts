@@ -17,7 +17,7 @@ const command: Command = {
             res = res[0];
             const embed = new EmbedBuilder()
             .setTitle("Message Count")
-            .setDescription(`You have sent ${res.msg} messages.`)
+            .setDescription(`You have sent \`${res.msg}\` messages.`)
             .setColor("Yellow")
             .setFooter({ text: "Requested by " + message.author.username })
             message.channel.send({ embeds: [embed] });
