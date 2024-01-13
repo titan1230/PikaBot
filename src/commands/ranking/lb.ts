@@ -38,7 +38,7 @@ const command: Command = {
 
             let page = 1;
 
-            const msg = await message.channel.send({ embeds: [embeds[page - 1]], components: [{ type: ComponentType.ActionRow, components: [prev.setDisabled(true).toJSON(), next.setDisabled(max_pages === 1 ? true : false).toJSON()] }] });
+            const msg = await message.channel.send({ embeds: [embeds[page - 1]], components: [{ type: ComponentType.ActionRow, components: [prev.setDisabled(true), next.setDisabled(max_pages === 1 ? true : false)] }] });
             const mc = message.createMessageComponentCollector({ filter: (i) => i.user.id === message.author.id, time: 60000, componentType: ComponentType.Button });
 
             mc.on("collect", async (i) => {
@@ -48,7 +48,7 @@ const command: Command = {
                 if (id === "next" && page != max_pages) {
                     page++;
                     await i.deferUpdate();
-                    await msg.edit({ embeds: [embeds[page - 1]], components: [{ type: ComponentType.ActionRow, components: [prev.setDisabled(false).toJSON(), next.setDisabled(page === max_pages ? true : false).toJSON()] }] });
+                    await msg.edit({ embeds: [embeds[page - 1]], components: [{ type: ComponentType.ActionRow, components: [prev.setDisabled(false), next.setDisabled(page === max_pages ? true : false)] }] });
                 }
 
                 if (id === "next" && page === max_pages) {
@@ -58,7 +58,7 @@ const command: Command = {
                 if (id === "prev" && page != 1) {
                     page--;
                     await i.deferUpdate();
-                    await msg.edit({ embeds: [embeds[page - 1]], components: [{ type: ComponentType.ActionRow, components: [prev.setDisabled(page === 1 ? true : false).toJSON(), next.setDisabled(false).toJSON()] }] });
+                    await msg.edit({ embeds: [embeds[page - 1]], components: [{ type: ComponentType.ActionRow, components: [prev.setDisabled(page === 1 ? true : false), next.setDisabled(false)] }] });
                 }
             });
 
