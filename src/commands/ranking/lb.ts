@@ -19,15 +19,20 @@ const command: Command = {
             conn = await pool.getConnection();
             const res = await conn.query(`SELECT * FROM leveling ORDER BY msg DESC`);
 
-            const max_pages = Math.ceil(res.length / 10);
+            const max_pages = Math.ceil(embeds.length / 10);
 
-            for (let i = 0; i < res.length; i++) {
-                s = s + `<@${res[i].uid}> ➤ ${res[i].msg}\n`
+            for (let a = 0; a < max_pages; a++) {
 
-                if (i % 10 === 0) {
-                    embed.setDescription(s)
-                    embeds.push(embed);
-                    s = ""
+                const embed = new EmbedBuilder().setTitle(`Leaderboard - Page ${a+1}`).setColor("Yellow");
+                
+                for (let i = 0; i < res.length; i++) {
+                    s = s + `<@${res[i].uid}> ➤ ${res[i].msg}\n`
+
+                    if (i % 10 === 0) {
+                        embed.setDescription(s);
+                        embeds.push(embed);
+                        s = ""
+                    }
                 }
             }
 
