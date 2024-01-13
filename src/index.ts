@@ -6,10 +6,11 @@ import { readdirSync } from "fs";
 import { join } from "path";
 import Express from "express";
 import routes from "./routes/routes";
+import { color } from "./functions";
 config();
 
 const app = Express();
-app.listen(3001, () => console.log("API STARTED ON PORT 3001"));
+app.listen(3001, () => console.log(color("text", "📚 API STARTED ON PORT 3001")));
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
 app.use("/api", routes);
