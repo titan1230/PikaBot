@@ -48,4 +48,38 @@ router.get('/hourly', async (req, res) => {
     res.send('Updated!');
 });
 
+router.get('/monthly', async (req, res) => {
+    const pass = req.query.pass;
+
+    if (pass !== process.env.PASS) {
+        res.status(401).send('Unauthorized!');
+        return;
+    }
+
+    let s = "TOP 5 PPL THIS MONTH!!!\n\n"; let conn;
+    try {
+        conn = await pool.getConnection();
+        const res = await conn.query(`SELECT * FROM leveling ORDER BY msg DESC LIMIT 5`);
+
+        res.map((r: any) => {
+            s += `<@${r.uid}>: ${r.msg}\n`
+        });
+
+        await conn.query(`TRUNCATE TABLE leveling`)
+    } catch (err) {
+        console.error(err);
+        res.status(501).send('Error!');
+        return;
+    } finally {
+        if (conn) conn.release();
+    }
+
+    const guild = await client.guilds.fetch(process.env.GUILD_ID!)
+    const channel = await guild?.channels.fetch("711087619366453298") as TextChannel
+    channel.send(s)
+
+    fetch(`http://scratcher.ddns.net:3001/api/hourly?pass=${process.env.PASS}`, { mode: 'no-cors'});
+    res.send('Updated!');
+});
+
 export default router;
