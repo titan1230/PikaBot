@@ -1,10 +1,10 @@
-import { EmbedBuilder, Message } from "discord.js";
+import { EmbedBuilder, Message, PermissionFlagsBits } from "discord.js";
 import { Command } from "../../types";
 import { pool } from "../../clients/db";
 
 const command: Command = {
     name: "init",
-    permissions: [],
+    permissions: [PermissionFlagsBits.Administrator],
     aliases: [],
     execute: async function (message: Message<boolean>, args: string[]) {
         await message.delete();

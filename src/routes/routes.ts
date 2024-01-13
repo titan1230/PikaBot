@@ -10,7 +10,13 @@ router.get('/', async (req, res) => {
 
 router.get('/hourly', async (req, res) => {
 
+    const pass = req.query.pass;
 
+    if (pass !== process.env.PASS) {
+        res.status(401).send('Unauthorized!');
+        return;
+    }
+    
     let s; let s1; let s2; let s3; let s4; let s5; let se;
 
     let conn;

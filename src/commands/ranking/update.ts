@@ -1,10 +1,10 @@
-import { EmbedBuilder, Message, TextChannel } from "discord.js";
+import { EmbedBuilder, Message, PermissionFlagsBits, TextChannel } from "discord.js";
 import { Command } from "../../types";
 import { pool } from "../../clients/db";
 
 const command: Command = {
     name: "update-score",
-    permissions: [],
+    permissions: [PermissionFlagsBits.KickMembers],
     aliases: [],
     execute: async function (message: Message<boolean>, args: string[]) {
 
