@@ -19,7 +19,7 @@ const command: Command = {
             const res = await conn.query(`SELECT * FROM leveling ORDER BY msg DESC`);
 
             const max_pages = Math.ceil(embeds.length / 10);
-
+            console.log(res.length, )
             for (let a = 0; a < max_pages; a++) {
 
                 const embed = new EmbedBuilder().setTitle(`Leaderboard - Page ${a+1}`).setColor("Yellow");
@@ -29,13 +29,14 @@ const command: Command = {
 
                     if (i % 10 === 0) {
                         embed.setDescription(s);
+
                         embeds.push(embed);
                         s = ""
                     }
                 }
             }
 
-            console.log(embeds)
+            console.log()
 
             let page = 1;
 
