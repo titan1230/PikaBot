@@ -239,6 +239,34 @@ const event: BotEvent = {
                 return
             }
 
+            if (id === "raffle") {
+                const role = interaction.guild.roles.cache.find(role => role.id === '1196021376482553886')
+
+                if (interaction.member.roles.cache.get('1196021376482553886')) {
+                    interaction.member.roles.remove(role!)
+                    await interaction.reply({content: `Removed \`${role?.name}\``, ephemeral: true})
+                    return
+                }
+
+                interaction.member.roles.add(role!)
+                await interaction.reply({content: `Added role \`${role?.name}\``, ephemeral: true})
+                return
+            }
+
+            if (id === "instant-tourney") {
+                const role = interaction.guild.roles.cache.find(role => role.id === '1196021421076385832')
+
+                if (interaction.member.roles.cache.get('1196021421076385832')) {
+                    interaction.member.roles.remove(role!)
+                    await interaction.reply({content: `Removed \`${role?.name}\``, ephemeral: true})
+                    return
+                }
+
+                interaction.member.roles.add(role!)
+                await interaction.reply({content: `Added role \`${role?.name}\``, ephemeral: true})
+                return
+            }
+
             // PLAYER ROLES
             if (id === 'myuu-player') {
                 const role = interaction.guild.roles.cache.find(role => role.id === '1172450216658616401')
