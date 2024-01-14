@@ -24,7 +24,7 @@ const event: BotEvent = {
 
                 const embed = new EmbedBuilder()
                     .setTitle("Welcome back!")
-                    .setDescription(`Welcome back, ${message.author}! I removed your AFK status.`)
+                    .setDescription(`Welcome back, ${message.interaction.user}! I removed your AFK status.`)
                     .setColor("Yellow")
                     .setTimestamp()
                 await message.reply({ embeds: [embed] }).then(m => setTimeout(() => m.delete(), 5000)).catch(err => console.log(err));
