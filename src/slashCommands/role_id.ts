@@ -3,8 +3,8 @@ import { SlashCommand } from "../types";
 
 const ClearCommand : SlashCommand = {
     command: new SlashCommandBuilder()
-    .setName("clear")
-    .setDescription("Delets messages from the current channel.")
+    .setName("role_id")
+    .setDescription("deletes messages from the current channel.")
     .addRoleOption(option => {
         return option
         .setName("role")
