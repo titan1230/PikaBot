@@ -165,7 +165,7 @@ const command: Command = {
     
         const nice_thing = `꒰ ୨୧ ─ ・┈ ・ ─ ・┈ ─ ・┈ ─ ・┈ ꒱꒱`;
         
-        message.channel.send({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Gender**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨♂️・ <@&709329063034224661>\n> ୨♀️・ <@&709329063034224661>\n> ୨🤐・ <@&709612295482900511>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [GenderRow] , allowedMentions: {parse: ["everyone", "roles"]} });
+        message.channel.send({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Gender**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨♂️・ <@&709329115009777716>\n> ୨♀️・ <@&709329063034224661>\n> ୨🤐・ <@&709612295482900511>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [GenderRow] , allowedMentions: {parse: ["everyone", "roles"]} });
         message.channel.send({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Devices**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨🖥・ <@&710012053657485405>\n> ୨💻・ <@&710012099652354067>\n> ୨📱・ <@&710012171748245555>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [deviceRow] , allowedMentions: {parse: ["everyone", "roles"]} });
         message.channel.send({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Notification Pings**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨📢・ <@&709617591425171496>\n> ୨🔔・ <@&745719126290596030>\n> ୨💸・ <@&738044822841065532>\n> ୨🥂・ <@&738044816465723462>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [notifRow] , allowedMentions: {parse: ["everyone", "roles"]} });
         message.channel.send({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Giveaways Pings**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨🎁・ <@&719463600506273802>\n> ୨🪅・ <@&865804259744546836>\n> ୨🎊・ <@&1171725338108244020>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [giveawayRow] , allowedMentions: {parse: ["everyone", "roles"]} });
