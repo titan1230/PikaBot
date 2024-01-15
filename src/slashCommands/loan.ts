@@ -49,6 +49,7 @@ const ClearCommand: SlashCommand = {
     execute: async interaction => {
 
         const command = interaction.options.getSubcommand()
+        let conn;
 
         switch (command) {
 
@@ -72,7 +73,6 @@ const ClearCommand: SlashCommand = {
                     return;
                 }
 
-                let conn;
                 try {
                     conn = await pool.getConnection();
 
@@ -140,6 +140,7 @@ const ClearCommand: SlashCommand = {
                     if (conn) conn.release();
                 }
             case "show":
+
                 try {
                     conn = await pool.getConnection();
 
