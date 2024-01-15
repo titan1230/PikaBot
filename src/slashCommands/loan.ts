@@ -151,7 +151,9 @@ const ClearCommand: SlashCommand = {
                     for (let i = 0; i < res[0].length; i++) {
                         const user = await interaction.client.users.fetch(res[i].uid)
 
-                        res[i].amount != 0 ? loans += `${user.username}: ${res[i].amount}\n` : loans += ""
+                        if (res[i].amount != 0) {
+                            loans += `${user.username}: ${res[i].amount}\n`
+                        }
                     }
 
                     interaction.reply({ content: loans.length === 0 ? "No loans found." : loans })
