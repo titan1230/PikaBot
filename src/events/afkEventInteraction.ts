@@ -5,7 +5,8 @@ import { pool } from "../clients/db";
 const event: BotEvent = {
     name: "messageCreate",
     execute: async (message: Message) => {
-        if (!message.member!.user.bot || !message.interaction) return;
+        if (!message.interaction) return;
+        if (message.member && !message.member.user.bot) return;
         if (!message.guild) return;
         
         let conn;
