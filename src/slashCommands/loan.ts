@@ -49,7 +49,7 @@ const ClearCommand: SlashCommand = {
     execute: async interaction => {
 
         const command = interaction.options.getSubcommand()
-        let conn;
+        let conn = null;
 
         switch (command) {
 
