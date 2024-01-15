@@ -37,7 +37,7 @@ declare global {
             MESSAGE_ID: string,
             GUILD_ID: string,
             ARCHIVE_CATEGORY_ID: string,
-            PASS: string,        
+            PASS: string,  
         }
     }
 }
