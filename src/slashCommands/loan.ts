@@ -44,24 +44,23 @@ const ClearCommand: SlashCommand = {
                 .setName("show")
                 .setDescription("Lists all loans")
         })
-        .setDescription("Deletes messages from the current channel."),
-
+        .setDescription("Loan."),
     execute: async interaction => {
+
+        if (interaction.user.id != "462203190298017793") {
+            interaction.reply({ ephemeral: true, content: "You are not allowed to use this command." })
+            return;
+        }
 
         const command = interaction.options.getSubcommand()
         let conn = null;
 
+        let user = interaction.options.get("user")?.user
+        let amount = Number(interaction.options.get("amount")?.value)
+
         switch (command) {
 
             case "add":
-                
-                if (interaction.user.id != "462203190298017793") {
-                    interaction.reply({ ephemeral: true, content: "You are not allowed to use this command." })
-                    return;
-                }
-
-                let user = interaction.options.get("user")?.user
-                let amount = Number(interaction.options.get("amount")?.value)
 
                 if (!user) {
                     interaction.reply({ ephemeral: true, content: "User not found." })
@@ -83,14 +82,14 @@ const ClearCommand: SlashCommand = {
                         await conn.query("INSERT INTO loan (uid, amount) VALUES (?, ?)", [user.id, amount])
                         try {
                             user.send(`You have been given a loan of ${amount} by my master.`)
-                        } catch (err) {}
+                        } catch (err) { }
                         interaction.reply({ content: "Successfully added loan." })
                         return;
                     } else {
                         await conn.query("UPDATE loan SET amount=amount+? WHERE uid = ?", [amount, user.id])
                         try {
                             user.send(`You have been given a loan of ${amount} by my master.`)
-                        } catch (err) {}
+                        } catch (err) { }
                         interaction.reply({ content: "Successfully added loan." })
                     }
                 } catch (err) {
@@ -100,14 +99,6 @@ const ClearCommand: SlashCommand = {
                 }
 
             case "remove":
-
-                if (interaction.user.id != "462203190298017793") {
-                    interaction.reply({ ephemeral: true, content: "You are not allowed to use this command." })
-                    return;
-                }
-
-                user = interaction.options.get("user")?.user
-                amount = Number(interaction.options.get("amount")?.value)
 
                 if (!user) {
                     interaction.reply({ ephemeral: true, content: "User not found." })
@@ -131,7 +122,7 @@ const ClearCommand: SlashCommand = {
                         await conn.query("UPDATE loan SET amount=amount-? WHERE uid = ?", [amount, user.id])
                         try {
                             user.send(`Your loan of ${res[0].amount}`)
-                        } catch (err) {}
+                        } catch (err) { }
                         interaction.reply({ content: "Successfully added loan." })
                     }
                 } catch (err) {
@@ -151,6 +142,7 @@ const ClearCommand: SlashCommand = {
                     for (let i = 0; i < res[0].length; i++) {
                         const user = await interaction.client.users.fetch(res[i].uid)
 
+                        console.log(res[i])
                         if (res[i].amount != 0) {
                             loans += `${user.username}: ${res[i].amount}\n`
                         }
