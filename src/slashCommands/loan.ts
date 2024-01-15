@@ -124,7 +124,7 @@ const ClearCommand: SlashCommand = {
 
                     const res = await conn.query("SELECT * FROM loan WHERE uid = ?", [user.id])
 
-                    if (res.length === 0) {
+                    if (!res[0]) {
                         interaction.reply({ content: "User not found." })
                         return;
                     } else {
