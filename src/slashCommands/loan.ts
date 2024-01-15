@@ -44,7 +44,7 @@ const ClearCommand: SlashCommand = {
                 .setName("show")
                 .setDescription("Lists all loans")
         })
-        .setDescription("Delets messages from the current channel."),
+        .setDescription("Deletes messages from the current channel."),
 
     execute: async interaction => {
 
@@ -53,7 +53,7 @@ const ClearCommand: SlashCommand = {
         switch (command) {
 
             case "add":
-
+                
                 if (interaction.user.id != "462203190298017793") {
                     interaction.reply({ ephemeral: true, content: "You are not allowed to use this command." })
                     return;
@@ -76,17 +76,18 @@ const ClearCommand: SlashCommand = {
                 try {
                     conn = await pool.getConnection();
 
-                    const res = await conn.query("SELECT * FROM users WHERE uid = ?", [user.id])
+                    const res = await conn.query("SELECT * FROM loan WHERE uid = ?", [user.id])
 
-                    if (res[0].length === 0) {
-                        await conn.query("INSERT INTO users (uid, amount) VALUES (?, ?)", [user.id, amount])
+                    if (!res[0]) {
+
+                        await conn.query("INSERT INTO loan (uid, amount) VALUES (?, ?)", [user.id, amount])
                         try {
                             user.send(`You have been given a loan of ${amount} by my master.`)
                         } catch (err) {}
                         interaction.reply({ content: "Successfully added loan." })
                         return;
                     } else {
-                        await conn.query("UPDATE users SET amount=amount+? WHERE uid = ?", [amount, user.id])
+                        await conn.query("UPDATE loan SET amount=amount+? WHERE uid = ?", [amount, user.id])
                         try {
                             user.send(`You have been given a loan of ${amount} by my master.`)
                         } catch (err) {}
@@ -121,13 +122,13 @@ const ClearCommand: SlashCommand = {
                 try {
                     conn = await pool.getConnection();
 
-                    const res = await conn.query("SELECT * FROM users WHERE uid = ?", [user.id])
+                    const res = await conn.query("SELECT * FROM loan WHERE uid = ?", [user.id])
 
-                    if (res[0].length === 0) {
+                    if (res.length === 0) {
                         interaction.reply({ content: "User not found." })
                         return;
                     } else {
-                        await conn.query("UPDATE users SET amount=amount-? WHERE uid = ?", [amount, user.id])
+                        await conn.query("UPDATE loan SET amount=amount-? WHERE uid = ?", [amount, user.id])
                         try {
                             user.send(`Your loan of ${res[0].amount}`)
                         } catch (err) {}
@@ -142,16 +143,17 @@ const ClearCommand: SlashCommand = {
                 try {
                     conn = await pool.getConnection();
 
-                    const res = await conn.query("SELECT * FROM users")
+                    const res = await conn.query("SELECT * FROM loan")
 
                     let loans = ""
 
                     for (let i = 0; i < res[0].length; i++) {
-                        const user = await interaction.client.users.fetch(res[i].uuid)
-                        loans += `${user.username}: ${res[i].amount}\n`
+                        const user = await interaction.client.users.fetch(res[i].uid)
+
+                        res[i].amount != 0 ? loans += `${user.username}: ${res[i].amount}\n` : loans += ""
                     }
 
-                    interaction.reply({ content: loans })
+                    interaction.reply({ content: loans.length === 0 ? "No loans found." : loans })
                 } catch (err) {
 
                 } finally {
