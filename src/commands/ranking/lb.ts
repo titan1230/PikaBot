@@ -18,8 +18,6 @@ const command: Command = {
             conn = await pool.getConnection();
             const res = await conn.query(`SELECT * FROM leveling ORDER BY msg DESC`);
 
-            const max_pages = Math.ceil(res.length / 10);
-
             for (let i = 0; i < res.length; i++) {
                 s = s + `<@${res[i].uid}> ➤ ${res[i].msg}\n`
 
@@ -42,6 +40,7 @@ const command: Command = {
                 embeds.push(lastEmbed);
             }
 
+            const max_pages = embeds.length;
             let page = 1;
 
             const msg = await message.channel.send({ embeds: [embeds[page - 1]], components: [{ type: ComponentType.ActionRow, components: [prev.setDisabled(true), next.setDisabled(max_pages === 1 ? true : false)] }] });
