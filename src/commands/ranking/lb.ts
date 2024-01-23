@@ -33,13 +33,15 @@ const command: Command = {
             }
 
             let s1 = "";
-            for (let j = last!+1; j < res.length; j++) {
+            for (let j = last! + 1; j < res.length; j++) {
                 s1 = s1 + `<@${res[j].uid}> ➤ ${res[j].msg}\n`
             }
 
-            const lastEmbed = new EmbedBuilder().setTitle(`Leaderboard - Page ${embeds.length + 1}`).setColor("Yellow").setDescription(s1);
-            embeds.push(lastEmbed);
-            
+            if (s1.length >= 1) {
+                const lastEmbed = new EmbedBuilder().setTitle(`Leaderboard - Page ${embeds.length + 1}`).setColor("Yellow").setDescription(s1);
+                embeds.push(lastEmbed);
+            }
+
             let page = 1;
 
             const msg = await message.channel.send({ embeds: [embeds[page - 1]], components: [{ type: ComponentType.ActionRow, components: [prev.setDisabled(true), next.setDisabled(max_pages === 1 ? true : false)] }] });
