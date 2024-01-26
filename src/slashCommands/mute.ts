@@ -46,10 +46,10 @@ const MuteCommand : SlashCommand = {
 
         if (hasRole) return interaction.reply("Target is already muted.");
         
-        await interaction.editReply({ content: `Are you sure you want to mute <@${user!.user.id}> for ${ms(ms(`${time}`))}?`, components: [row] });
+        const edit = await interaction.editReply({ content: `Are you sure you want to mute <@${user!.user.id}> for ${ms(ms(`${time}`))}?`, components: [row] });
         
         const filter = (interaction:any) => interaction.user.id === interaction.author.id
-        const collector = def.createMessageComponentCollector({ filter, time: 15000, max: 1 })
+        const collector = edit.createMessageComponentCollector({ filter, time: 15000, max: 1 })
 
         collector!.on("collect", async (i) => {
             const id = i.customId
