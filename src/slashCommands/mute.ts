@@ -46,7 +46,8 @@ const MuteCommand : SlashCommand = {
         
         const repl = await interaction.reply({ content: `Are you sure you want to mute <@${user!.user.id}> for ${ms(ms(`${time}`))}?`, components: [row] });
         
-        const filter = (interaction:any) => interaction.user.id === interaction.author.id
+        const filter = (i:any) => i.user.id === interaction.user.id;
+        
         const collector = repl.createMessageComponentCollector({ filter, time: 15000, max: 1, componentType: ComponentType.Button });
         
         collector!.on("collect", async (i) => {
