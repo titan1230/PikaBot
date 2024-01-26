@@ -19,9 +19,11 @@ const MuteCommand : SlashCommand = {
         .setRequired(false)
     })
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
-    execute: interaction => {
+    execute: async interaction => {
 
         if (!interaction.inCachedGuild()) return;
+
+        const def = await interaction.deferReply();
 
         let user = interaction.options.get("user")?.member;
         let time = interaction.options.get("time")?.value || '1h';
@@ -43,9 +45,11 @@ const MuteCommand : SlashCommand = {
         const hasRole = user!.roles.cache.find(role => role.name === 'Muted');
 
         if (hasRole) return interaction.reply("Target is already muted.");
-
+        
+        await interaction.editReply({ content: `Are you sure you want to mute <@${user!.user.id}> for ${ms(ms(`${time}`))}?`, components: [row] });
+        
         const filter = (interaction:any) => interaction.user.id === interaction.author.id
-        const collector = interaction.channel?.createMessageComponentCollector({ filter, time: 15000, max: 1 })
+        const collector = def.createMessageComponentCollector({ filter, time: 15000, max: 1 })
 
         collector!.on("collect", async (i) => {
             const id = i.customId
@@ -80,6 +84,12 @@ const MuteCommand : SlashCommand = {
                 await i.deferUpdate();
                 await interaction.followUp('Command canceled');
                 return;
+            }
+        })
+
+        collector!.on("end", async (i) => {
+            if (i.size === 0) {
+                await interaction.editReply({ content: "Command timed out", components: [] });
             }
         })
     },
