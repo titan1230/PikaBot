@@ -74,10 +74,12 @@ router.get('/monthly', async (req, res) => {
         if (conn) conn.release();
     }
 
-    const guild = await client.guilds.fetch(process.env.GUILD_ID!)
-    const channel = await guild?.channels.fetch("711087619366453298") as TextChannel
-    channel.send(s)
+    const guild = await client.guilds.fetch(process.env.GUILD_ID!);
+    const channel = await guild?.channels.fetch("711087619366453298") as TextChannel;
+    const sent = channel.send(s);
 
+    (await sent).pin();
+    
     await fetch(`http://scratcher.ddns.net:3001/api/hourly?pass=${process.env.PASS}`, { mode: 'no-cors'});
     res.send('Updated!');
 });
