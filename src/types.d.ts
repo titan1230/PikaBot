@@ -52,6 +52,7 @@ declare module "discord.js" {
 
 interface Timeout {
     id: number,
+    userID: string,
     type: string,
     time: number,
 }
