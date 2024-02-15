@@ -1,4 +1,4 @@
-import { PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
+import { PermissionFlagsBits, SlashCommandBuilder, TextChannel } from "discord.js";
 import { SlashCommand } from "../types";
 
 const ClearCommand : SlashCommand = {
@@ -21,13 +21,26 @@ const ClearCommand : SlashCommand = {
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
     execute: async interaction => {
         const user = interaction.options.getUser("user", true)
-        const message = interaction.options.getString("message", true)
+        let messageID = interaction.options.getString("message", true)
 
-        await user.send(message).then(() => {
+        if (messageID.includes("-")) {
+            messageID = messageID.split("-")[1];
+        }
+
+        let msg;
+        try {
+            msg = await interaction.channel?.messages.fetch(messageID);
+        } catch (err) {
+            console.log(err)
+            interaction.reply({ content: `Failed to fetch message.\nRe-check the message ID.`, ephemeral: true })
+            return;
+        }
+
+        await user.send(msg?.content!).then(() => {
             interaction.reply({ content: `Sent a DM to ${user.username}`, ephemeral: true })
         }).catch(() => {
             interaction.reply({ content: `Failed to send a DM to ${user.username}`, ephemeral: true })
-        })
+        });
     },
     cooldown: 10
 }
