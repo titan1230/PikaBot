@@ -49,3 +49,9 @@ declare module "discord.js" {
         cooldowns: Collection<string, number>
     }
 }
+
+interface Timeouts {
+    id: Number,
+    type: String,
+    time: Number,
+}
