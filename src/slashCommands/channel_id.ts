@@ -14,7 +14,7 @@ const ClearCommand : SlashCommand = {
     })
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages),
     execute: interaction => {
-        const channel = interaction.options.getRole("channel", true);
+        const channel = interaction.options.getChannel("channel", true);
         interaction.reply(channel.id);
     },
     cooldown: 10
