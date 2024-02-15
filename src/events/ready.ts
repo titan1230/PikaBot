@@ -42,11 +42,15 @@ const event: BotEvent = {
                             if (timeout.type === "mute") {
                                 const role = guild?.roles.cache.find(role => role.id === "726369003349737502");
 
+                                if (!member.roles.cache.has(role?.id!)) return;
+
                                 if (role) {
                                     member.roles.remove(role);
                                 }
                             } else if (timeout.type === "counting") {
                                 const role = guild?.roles.cache.find(role => role.id === "1207648049757687808");
+
+                                if (!member.roles.cache.has(role?.id!)) return;
 
                                 if (role) {
                                     member.roles.remove(role);
