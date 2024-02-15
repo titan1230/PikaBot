@@ -1,6 +1,7 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, ComponentType, PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
 import { SlashCommand } from "../types";
 import ms from "ms";
+import { pool } from "../clients/db";
 
 const MuteCommand : SlashCommand = {
     command: new SlashCommandBuilder()
@@ -23,8 +24,15 @@ const MuteCommand : SlashCommand = {
 
         if (!interaction.inCachedGuild()) return;
 
-        let user = interaction.options.get("user")?.member;
-        let time = interaction.options.get("time")?.value || '1h';
+        let user = interaction.options.get("user", true)?.member;
+        let time = interaction.options.getString("time") || "1h";
+
+        const timeInMs = ms(time);
+
+        if (!timeInMs) {
+            interaction.reply({ content: "Invalid time format.", ephemeral: true });
+            return;
+        }
 
         const row:any = new ActionRowBuilder().addComponents(
             new ButtonBuilder()
@@ -58,9 +66,16 @@ const MuteCommand : SlashCommand = {
                 await user!.roles.add(muteRole!);
                 await interaction.followUp(`<@${user!.user.id}> has been muted for ${ms(ms(`${time}`))}`);
 
-                setTimeout(function () {
-                    user!.roles.remove(muteRole!);
-                }, ms(`${time}`));
+                let conn;
+                try {
+                    conn = await pool.getConnection();
+
+                    const res = await conn.query("INSERT INTO timeouts (userID, type, time) VALUES (?, ?, ?)", [user!.user.id, "mute", Date.now() + timeInMs]);
+                } catch (err) {
+                    console.log(err);
+                } finally {
+                    if (conn) conn.release();
+                }
                 return;
             }
 
