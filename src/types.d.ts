@@ -50,8 +50,8 @@ declare module "discord.js" {
     }
 }
 
-interface Timeouts {
-    id: Number,
-    type: String,
-    time: Number,
+interface Timeout {
+    id: number,
+    type: string,
+    time: number,
 }
