@@ -34,7 +34,7 @@ const ClearCommand : SlashCommand = {
         const title = interaction.options.getString("title", true)
         let messageID = interaction.options.getString("message", true)
 
-        const LOGGING_CHANNEL = interaction.guild?.channels.cache.get("721302707943637082") as TextChannel;
+        const LOGGING_CHANNEL = interaction.guild?.channels.cache.get("1207634201810313257") as TextChannel;
 
         const embed = new EmbedBuilder()
         .setTitle(title)
