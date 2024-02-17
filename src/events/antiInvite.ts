@@ -7,6 +7,8 @@ const event: BotEvent = {
         if (message.author.bot) return;
         if (!message.guild) return;
 
+        console.log(message.guild.invites);
+
         const links = ["discord.gg", "discord.com/invite", "discordapp.com/invite"];
 
         for (const link of links) {
@@ -14,7 +16,7 @@ const event: BotEvent = {
 
             const code = message.content.split(link)[1].split(" ")[0];
 
-            const isGuildCode = message.guild.invites.cache.has(code);
+            const isGuildCode = await message.guild.invites.fetch(code);
             const isVanityCode = code === message.guild.vanityURLCode;
 
             if (isGuildCode || isVanityCode) return;
