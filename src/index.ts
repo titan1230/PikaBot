@@ -1,5 +1,5 @@
 import { Client, GatewayIntentBits, Collection, PermissionFlagsBits,} from "discord.js";
-const { Guilds, MessageContent, GuildMessages, GuildMembers } = GatewayIntentBits;
+const { Guilds, MessageContent, GuildMessages, GuildMembers, GuildInvites } = GatewayIntentBits;
 import { Command, SlashCommand } from "./types";
 import { config } from "dotenv";
 import { readdirSync } from "fs";
@@ -16,7 +16,7 @@ app.use(Express.urlencoded({ extended: true }));
 app.use("/api", routes);
 
 export const client = new Client({
-    intents:[Guilds, MessageContent, GuildMessages, GuildMembers],
+    intents: [Guilds, MessageContent, GuildMessages, GuildMembers, GuildInvites],
     allowedMentions: { parse: ["users"], repliedUser: true },
 });
 
