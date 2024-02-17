@@ -14,7 +14,7 @@ const event: BotEvent = {
 
             const code = message.content.split(link)[1].split(" ")[0];
 
-            const isGuildCode = message.guild.invites.cache.find(invite => invite.code === code);
+            const isGuildCode = message.guild.invites.cache.has(code);
             const isVanityCode = code === message.guild.vanityURLCode;
 
             if (isGuildCode || isVanityCode) return;
