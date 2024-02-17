@@ -7,39 +7,54 @@ const event: BotEvent = {
         if (message.author.bot) return;
         if (!message.guild) return;
 
-        console.log(message.guild.invites);
+        if (message.member?.permissions.has(PermissionFlagsBits.Administrator)) return;
 
-        const links = ["discord.gg", "discord.com/invite", "discordapp.com/invite"];
+        let regex = /https?:\/\/discord.gg\/(\w+)/g;
 
-        for (const link of links) {
-            if (!message.content.includes(link)) return;
+        let codeArray:string[] = [];
+        let match;
 
-            const code = message.content.split(link)[1].split(" ")[0];
+        while ((match = regex.exec(message.content)) !== null) {
+            codeArray.push(match[1]); 
+        }
 
-            const isGuildCode = await message.guild.invites.fetch(code);
+        if (codeArray.length === 0) return;
+
+        for (let code of codeArray) {
+
             const isVanityCode = code === message.guild.vanityURLCode;
+            if (isVanityCode) continue;
 
-            if (isGuildCode || isVanityCode) return;
+            let isGuildCode = false;
 
-            const loggingChannel = await message.guild.channels.fetch(process.env.PIKA_LOGS) as TextChannel;
+            try {
+                await message.guild.invites.fetch(code);
+                isGuildCode = true;
+            } catch (err) { }
 
-            await message.delete().catch((err) => {});
-            
+            if (isGuildCode) continue;
+
+            const loggingChannel = await message.guild.channels.fetch(process.env.PIKA_LOGS).catch((err) => { }) as TextChannel;
+
+            await message.delete().catch((err) => { console.log(err) });
+
             const emebd = new EmbedBuilder()
                 .setTitle("Anti-Invite")
                 .setDescription("You are not allowed to send invites here")
                 .setColor("Red")
                 .setTimestamp()
                 .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL() });
-            message.channel.send({ embeds: [emebd] });
+            message.channel.send({ embeds: [emebd] }).catch((err) => { });
 
             const loggingEmbed = new EmbedBuilder()
                 .setTitle("Anti-Invite ❌")
-                .setDescription(`${message.author} has sent an invite in ${message.channel}\n\n**User ID:** ${message.author.id}\n\n**Invite:** ${link}${code}\n\n**Message:** ${message.content}`)
+                .setDescription(`${message.author} has sent an invite in ${message.channel}\n\n**User ID:** ${message.author.id}\n\n**Invite:** [Invite Here](https://discord.gg/${code})\n\n**Message:** ${message.content}`)
                 .setColor("Red")
                 .setTimestamp()
                 .setFooter({ text: message.author.tag, iconURL: message.author.displayAvatarURL() });
-            loggingChannel.send({ embeds: [loggingEmbed] })
+            loggingChannel.send({ embeds: [loggingEmbed] }).catch((err) => { });
+
+            break;
         }
     }
 }
