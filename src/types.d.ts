@@ -38,6 +38,7 @@ declare global {
             GUILD_ID: string,
             ARCHIVE_CATEGORY_ID: string,
             PASS: string,  
+            PIKA_LOGS: string,
         }
     }
 }
