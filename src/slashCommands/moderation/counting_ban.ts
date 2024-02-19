@@ -1,7 +1,7 @@
 import { EmbedBuilder, PermissionFlagsBits, SlashCommandBuilder, TextChannel } from "discord.js";
-import { SlashCommand } from "../types";
+import { SlashCommand } from "../../types";
 import ms from "ms";
-import { pool } from "../clients/db";
+import { pool } from "../../clients/db";
 
 const ClearCommand : SlashCommand = {
     command: new SlashCommandBuilder()

@@ -1,6 +1,6 @@
 import chalk from "chalk"
-import { Guild, GuildMember, PermissionFlagsBits, PermissionResolvable, TextChannel } from "discord.js";
-import { Command } from "./types";
+import { Guild, GuildMember, PermissionFlagsBits, PermissionResolvable, SlashCommandBuilder, TextChannel } from "discord.js";
+import { Command, SlashCommand } from "./types";
 import { readdirSync, statSync } from "fs";
 import { join } from "path";
 
@@ -60,6 +60,32 @@ export function readCommands(commandsDir: any, client: any) {
 
     readFilesInDirectory(commandsDir);
     return commands;
+}
+
+export function readSlashCommands(slashCommandsDir: any, client: any) {
+    const slashCommands: SlashCommandBuilder[] = [];
+
+    function readFilesInDirectory(directory: any) {
+        const files = readdirSync(directory);
+
+        for (const file of files) {
+            const filePath = join(directory, file);
+            const fileStat = statSync(filePath);
+
+            if (fileStat.isDirectory()) {
+                // If it's a sub-directory, recursively read files in that directory
+                readFilesInDirectory(filePath);
+            } else if (file.endsWith('.js')) {
+                // If it's a .js file, require and add it as a command
+                const command:SlashCommand = require(filePath).default;
+                slashCommands.push(command.command);
+                client.slashCommands.set(command.command.name, command);
+            }
+        }
+    }
+
+    readFilesInDirectory(slashCommandsDir);
+    return slashCommands;
 }
 
 export function getRandomValue(max: number, min: number) {

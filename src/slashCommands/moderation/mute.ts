@@ -1,7 +1,7 @@
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ChannelType, ComponentType, PermissionFlagsBits, SlashCommandBuilder } from "discord.js";
-import { SlashCommand } from "../types";
+import { SlashCommand } from "../../types";
 import ms from "ms";
-import { pool } from "../clients/db";
+import { pool } from "../../clients/db";
 
 const MuteCommand : SlashCommand = {
     command: new SlashCommandBuilder()
