@@ -17,7 +17,9 @@ const ClearCommand : SlashCommand = {
 
         if(!channel) return interaction.reply({ content: "Channel not found", ephemeral: true });
 
-        channel.setParent(process.env.ARCHIVE_CATEGORY_ID!);
+        channel.setParent(process.env.ARCHIVE_CATEGORY_ID!).catch((err) => {
+            return interaction.reply({ content: "Failed to archive the channel", ephemeral: true });
+        });
         interaction.reply({ ephemeral: true, content: `Successfully archived ${channel}`});
     },
     cooldown: 10
