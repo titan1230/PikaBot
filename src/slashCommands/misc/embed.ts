@@ -1,9 +1,10 @@
-import { SlashCommandBuilder, TextChannel, EmbedBuilder, ColorResolvable } from "discord.js"
+import { SlashCommandBuilder, TextChannel, EmbedBuilder, ColorResolvable, PermissionFlagsBits } from "discord.js"
 import { SlashCommand } from "../../types";
 
 const command: SlashCommand = {
     command: new SlashCommandBuilder()
         .setName("embed")
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
         .addStringOption(option => {
             return option
                 .setName("title")
@@ -29,8 +30,7 @@ const command: SlashCommand = {
                 .setRequired(true)
                 .setAutocomplete(true);
         })
-        .setDescription("Create a new embed message.")
-    ,
+        .setDescription("Create a new embed message."),
     autocomplete: async (interaction) => {
         try {
             const focusedValue = interaction.options.getFocused();
