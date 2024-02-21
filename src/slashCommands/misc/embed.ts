@@ -30,6 +30,12 @@ const command: SlashCommand = {
                 .setRequired(true)
                 .setAutocomplete(true);
         })
+        .addStringOption(option => {
+            return option
+                .setName("footer")
+                .setDescription("Footer of the embed message.")
+                .setRequired(false);
+        })
         .setDescription("Create a new embed message."),
     autocomplete: async (interaction) => {
         try {
@@ -88,14 +94,15 @@ const command: SlashCommand = {
                 .setDescription(options.description.toString())
                 .setThumbnail(interaction.client.user?.avatarURL() || null)
                 .setTimestamp()
-                .setFooter({ text: "Test embed message", iconURL: interaction.client.user?.avatarURL() || undefined });
             let selectedTextChannel = interaction.channel?.client.channels.cache.get(options.channel.toString()) as TextChannel
+            
+            if (options.footer) embed.setFooter({ text: options.footer.toString()});
+
             selectedTextChannel.send({ embeds: [embed] });
             return interaction.editReply({ content: "Embed message successfully sent." })
         } catch (error) {
             interaction.editReply({ content: "Something went wrong..." });
         }
-
     },
     cooldown: 10
 }
