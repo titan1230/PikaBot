@@ -135,6 +135,14 @@ const command: Command = {
                 .setStyle(ButtonStyle.Primary),
         )
 
+        const eventRow2:any = new ActionRowBuilder().addComponents(
+            new ButtonBuilder()
+                .setCustomId('amusement')
+                .setLabel('Amusement Ping')
+                .setEmoji('<:derpcharmander:975406442209214577>')
+                .setStyle(ButtonStyle.Primary),
+        )
+
         const quickGW:any = new ActionRowBuilder().addComponents(
             new ButtonBuilder()
                 .setCustomId('quick-myuu')
@@ -170,7 +178,7 @@ const command: Command = {
         message.channel.send({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Notification Pings**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨📢・ <@&709617591425171496>\n> ୨🔔・ <@&745719126290596030>\n> ୨💸・ <@&738044822841065532>\n> ୨🥂・ <@&738044816465723462>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [notifRow] , allowedMentions: {parse: ["everyone", "roles"]} });
         message.channel.send({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Giveaways Pings**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨🎁・ <@&719463600506273802>\n> ୨🪅・ <@&865804259744546836>\n> ୨🎊・ <@&1171725338108244020>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [giveawayRow] , allowedMentions: {parse: ["everyone", "roles"]} });
         // message.channel.send({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Quick Giveaways**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨✨・ <@&1188388890868985896>\n> ୨🌟・ <@&1192498310553014343>\n> ୨⚡・ <@&1192498280265961605>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [quickGW] , allowedMentions: {parse: ["everyone", "roles"]} });
-        message.channel.send({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Events Pings**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨🏮・ <@&737628220538748978>\n> ୨🎉・ <@&1171737891085504542>\n> ୨🧨・ <@&1171738148510900234>\n> ୨🎟️・ <@&1196021376482553886>\n> ୨⚔️・ <@&1196021421076385832>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [eventRow] , allowedMentions: {parse: ["everyone", "roles"]} });
+        message.channel.send({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Events Pings**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨🏮・ <@&737628220538748978>\n> ୨🎉・ <@&1171737891085504542>\n> ୨🧨・ <@&1171738148510900234>\n> ୨🎟️・ <@&1196021376482553886>\n> ୨⚔️・ <@&1196021421076385832>\n> ୨<:derpcharmander:975406442209214577>・<@&1213091188282892369>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [eventRow, eventRow2] , allowedMentions: {parse: ["everyone", "roles"]} });
         message.channel.send({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Access Roles**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨🌿・ <@&1172450216658616401>\n> ୨🌴・ <@&1172450255913103370>\n> ୨🪵・ <@&1172450283054452756>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [playerRow] , allowedMentions: {parse: ["everyone", "roles"]} });
         message.channel.send({ content: nice_thing })
     },
