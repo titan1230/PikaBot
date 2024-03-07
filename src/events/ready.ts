@@ -1,4 +1,4 @@
-import { Client } from "discord.js";
+import { Client, TextChannel } from "discord.js";
 import { BotEvent, Timeout } from "../types";
 import { color } from "../functions";
 import { pool } from "../clients/db";
@@ -56,6 +56,10 @@ const event: BotEvent = {
                                     member.roles.remove(role);
                                 }
                             }
+                        } else {
+                            console.log(`Member with ID ${timeout.userID} not found in guild`);
+                            const channel = guild?.channels.cache.get("711087619366453298") as TextChannel;
+                            channel.send(`Cannot remove role from member <@${timeout.userID}>.`);
                         }
                     }
                 }
