@@ -17,13 +17,22 @@ const MuteCommand: SlashCommand = {
                 .setDescription("Reason for the ban.")
                 .setRequired(false)
         })
-        .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers),
+        .addBooleanOption(option => {
+            return option
+                .setName("delete-message")
+                .setDescription("Delete the banned members past 7 days of messages.")
+                .setRequired(false)
+        })
+        .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
     execute: async interaction => {
 
         if (!interaction.inCachedGuild()) return;
 
         let user = interaction.options.get("user", true)?.member;
         let reason = interaction.options.getString("reason");
+        let deleteMessage = interaction.options.getBoolean("delete-message");
+
+        if (!deleteMessage) deleteMessage = false;
 
         if (!user) return interaction.reply({ content: "Please mention a user to ban.", ephemeral: true });
 
@@ -54,12 +63,27 @@ const MuteCommand: SlashCommand = {
             if (i.customId === "Yes") {
 
                 if (reason) {
-                    await user!.ban({ reason: `${reason} - Banned by ${interaction.member.user.username}` });
-                    await interaction.editReply({ content: `Banned <@${user!.user.id}> for ${reason}`, components: [] });
-                    user?.send(`You were banned from ${interaction.guild?.name} for ${reason}`).catch((err) => { });
+
+                    if (deleteMessage) {
+                        await user!.ban({ reason: `${reason} - Banned by ${interaction.member.user.username}`, deleteMessageSeconds: 60 * 60 * 24 * 7 });
+                        await interaction.editReply({ content: `Banned <@${user!.user.id}> for ${reason}`, components: [] });
+                        await user?.send(`You were banned from ${interaction.guild?.name} for ${reason}`).catch((err) => { });
+                    } else {
+                        await user!.ban({ reason: `${reason} - Banned by ${interaction.member.user.username}` });
+                        await interaction.editReply({ content: `Banned <@${user!.user.id}> for ${reason}`, components: [] });
+                        await user?.send(`You were banned from ${interaction.guild?.name} for ${reason}`).catch((err) => { });
+                    }
                 } else {
-                    await user!.ban({ reason: `Reason not provided - Banned by ${interaction.member.user.username}` });
-                    await interaction.editReply({ content: `Banned <@${user!.user.id}>`, components: [] });
+
+                    if (deleteMessage) {
+                        await user!.ban({ reason: `Reason not provided - Banned by ${interaction.member.user.username}`, deleteMessageSeconds: 60 * 60 * 24 * 7 });
+                        await interaction.editReply({ content: `Banned <@${user!.user.id}>`, components: [] });
+                        await user?.send(`You were banned from ${interaction.guild?.name}`).catch((err) => { });
+                    } else {
+                        await user!.ban({ reason: `Reason not provided - Banned by ${interaction.member.user.username}` });
+                        await interaction.editReply({ content: `Banned <@${user!.user.id}>`, components: [] });
+                        await user?.send(`You were banned from ${interaction.guild?.name}`).catch((err) => { });
+                    }
                 }
             } else {
                 await interaction.editReply({ content: `Cancelled`, components: [] });
