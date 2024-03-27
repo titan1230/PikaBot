@@ -91,3 +91,11 @@ export function readSlashCommands(slashCommandsDir: any, client: any) {
 export function getRandomValue(max: number, min: number) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+export function randAlphaNum() {
+    return Math.random().toString(36).slice(2)
+}
+
+export function getEmotes(str: string) {
+    return str.match(/<a?:.+?:\d{18}>|\p{Extended_Pictographic}/gu);
+}

@@ -57,3 +57,8 @@ interface Timeout {
     type: string,
     time: number,
 }
+
+interface role {
+    custom_id: string,
+    role_id: string,
+}
