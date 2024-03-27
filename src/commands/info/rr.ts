@@ -5,7 +5,7 @@ const command: Command = {
     name: "rr",
     permissions: [PermissionFlagsBits.Administrator],
     aliases: [],
-    execute: function (message: Message<boolean>, args: string[]) {
+    execute: async function (message: Message<boolean>, args: string[]) {
         message.delete()
 
         const GenderRow:any = new ActionRowBuilder().addComponents(
@@ -172,14 +172,21 @@ const command: Command = {
         // message.channel.send(nice_thing)
     
         const nice_thing = `꒰ ୨୧ ─ ・┈ ・ ─ ・┈ ─ ・┈ ─ ・┈ ꒱꒱`;
+
+        const s1 = await message.channel.send({ content: "a", allowedMentions: {parse: ["everyone", "roles"]}});
+        const s2 = await message.channel.send({ content: "b", allowedMentions: {parse: ["everyone", "roles"]}});
+        const s3 = await message.channel.send({ content: "c", allowedMentions: {parse: ["everyone", "roles"]}});
+        const s4 = await message.channel.send({ content: "d", allowedMentions: {parse: ["everyone", "roles"]}});
+        const s5 = await message.channel.send({ content: "e", allowedMentions: {parse: ["everyone", "roles"]}});
+        const s6 = await message.channel.send({ content: "f", allowedMentions: {parse: ["everyone", "roles"]}});
         
-        message.channel.send({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Gender**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨♂️・ <@&709329115009777716>\n> ୨♀️・ <@&709329063034224661>\n> ୨🤐・ <@&709612295482900511>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [GenderRow] , allowedMentions: {parse: ["everyone", "roles"]} });
-        message.channel.send({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Devices**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨🖥・ <@&710012053657485405>\n> ୨💻・ <@&710012099652354067>\n> ୨📱・ <@&710012171748245555>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [deviceRow] , allowedMentions: {parse: ["everyone", "roles"]} });
-        message.channel.send({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Notification Pings**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨📢・ <@&709617591425171496>\n> ୨🔔・ <@&745719126290596030>\n> ୨💸・ <@&738044822841065532>\n> ୨🥂・ <@&738044816465723462>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [notifRow] , allowedMentions: {parse: ["everyone", "roles"]} });
-        message.channel.send({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Giveaways Pings**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨🎁・ <@&719463600506273802>\n> ୨🪅・ <@&865804259744546836>\n> ୨🎊・ <@&1171725338108244020>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [giveawayRow] , allowedMentions: {parse: ["everyone", "roles"]} });
+        await s1.edit({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Gender**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨♂️・ <@&709329115009777716>\n> ୨♀️・ <@&709329063034224661>\n> ୨🤐・ <@&709612295482900511>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [GenderRow] , allowedMentions: {parse: ["everyone", "roles"]} });
+        await s2.edit({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Devices**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨🖥・ <@&710012053657485405>\n> ୨💻・ <@&710012099652354067>\n> ୨📱・ <@&710012171748245555>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [deviceRow] , allowedMentions: {parse: ["everyone", "roles"]} });
+        await s3.edit({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Notification Pings**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨📢・ <@&709617591425171496>\n> ୨🔔・ <@&745719126290596030>\n> ୨💸・ <@&738044822841065532>\n> ୨🥂・ <@&738044816465723462>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [notifRow] , allowedMentions: {parse: ["everyone", "roles"]} });
+        await s4.edit({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Giveaways Pings**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨🎁・ <@&719463600506273802>\n> ୨🪅・ <@&865804259744546836>\n> ୨🎊・ <@&1171725338108244020>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [giveawayRow] , allowedMentions: {parse: ["everyone", "roles"]} });
         // message.channel.send({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Quick Giveaways**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨✨・ <@&1188388890868985896>\n> ୨🌟・ <@&1192498310553014343>\n> ୨⚡・ <@&1192498280265961605>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [quickGW] , allowedMentions: {parse: ["everyone", "roles"]} });
-        message.channel.send({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Events Pings**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨🏮・ <@&737628220538748978>\n> ୨🎉・ <@&1171737891085504542>\n> ୨🧨・ <@&1171738148510900234>\n> ୨🎟️・ <@&1196021376482553886>\n> ୨⚔️・ <@&1196021421076385832>\n> ୨<:derpcharmander:975406442209214577>・<@&1213091188282892369>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [eventRow, eventRow2] , allowedMentions: {parse: ["everyone", "roles"]} });
-        message.channel.send({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Access Roles**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨🌿・ <@&1172450216658616401>\n> ୨🌴・ <@&1172450255913103370>\n> ୨🪵・ <@&1172450283054452756>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [playerRow] , allowedMentions: {parse: ["everyone", "roles"]} });
+        await s5.edit({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Events Pings**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨🏮・ <@&737628220538748978>\n> ୨🎉・ <@&1171737891085504542>\n> ୨🧨・ <@&1171738148510900234>\n> ୨🎟️・ <@&1196021376482553886>\n> ୨⚔️・ <@&1196021421076385832>\n> ୨<:derpcharmander:975406442209214577>・<@&1213091188282892369>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [eventRow, eventRow2] , allowedMentions: {parse: ["everyone", "roles"]} });
+        await s6.edit({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Access Roles**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨🌿・ <@&1172450216658616401>\n> ୨🌴・ <@&1172450255913103370>\n> ୨🪵・ <@&1172450283054452756>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [playerRow] , allowedMentions: {parse: ["everyone", "roles"]} });
         message.channel.send({ content: nice_thing })
     },
 };
