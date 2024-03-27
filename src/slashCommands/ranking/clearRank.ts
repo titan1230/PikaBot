@@ -10,7 +10,7 @@ const MuteCommand : SlashCommand = {
     .addUserOption(option => {
         return option
         .setName("user")
-        .setDescription("User to be warned")
+        .setDescription("User to be cleared")
         .setRequired(true)
     })
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
