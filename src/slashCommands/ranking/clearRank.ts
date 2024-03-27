@@ -59,11 +59,11 @@ const MuteCommand : SlashCommand = {
             } else {
                 await interaction.editReply({ components: [], content: `Cancelled.` });
             }
-        })
+        });
 
         collector.on("end", async () => {
             await interaction.editReply({ components: [] });
-        })
+        });
     }
 }
 
