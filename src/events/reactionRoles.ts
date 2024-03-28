@@ -678,42 +678,43 @@ const event: BotEvent = {
                     ephemeral: true,
                 });
                 return;
-            }
-            try {
-                conn = await pool.getConnection();
-                const roles: role[] = await conn.query(
-                    "SELECT * FROM rr WHERE custom_id = ?",
-                    [id]
-                );
+            } else {
+                try {
+                    conn = await pool.getConnection();
+                    const roles: role[] = await conn.query(
+                        "SELECT * FROM rr WHERE custom_id = ?",
+                        [id]
+                    );
 
-                if (roles.length === 0) return;
+                    if (roles.length === 0) return;
 
-                const r = interaction.guild.roles.cache.find(
-                    (role) => role.id === roles[0].role_id
-                );
+                    const r = interaction.guild.roles.cache.find(
+                        (role) => role.id === roles[0].role_id
+                    );
 
-                if (interaction.member.roles.cache.get(r!.id)) {
-                    interaction.member.roles.remove(r!);
+                    if (interaction.member.roles.cache.get(r!.id)) {
+                        interaction.member.roles.remove(r!);
+                        await interaction.reply({
+                            content: `Removed \`${r?.name}\``,
+                            ephemeral: true,
+                        });
+
+                        return;
+                    }
+
+                    interaction.member.roles.add(r!);
                     await interaction.reply({
-                        content: `Removed \`${r?.name}\``,
+                        content: `Added role \`${r?.name}\``,
                         ephemeral: true,
                     });
 
                     return;
-                }
-
-                interaction.member.roles.add(r!);
-                await interaction.reply({
-                    content: `Added role \`${r?.name}\``,
-                    ephemeral: true,
-                });
-
-                return;
-            } catch (error) {
-                console.log(error);
-            } finally {
-                if (conn) {
-                    conn.release();
+                } catch (error) {
+                    console.log(error);
+                } finally {
+                    if (conn) {
+                        conn.release();
+                    }
                 }
             }
         } catch (err) {
