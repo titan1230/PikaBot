@@ -270,12 +270,12 @@ const NewRRCommand: SlashCommand = {
         }
         try {
 
-            const sent = await channel.send("a");
+            const sent = await channel.send({ content: "a", allowedMentions: { parse: ["everyone"] } });
 
             await sent.edit({
                 content: `||@everyone||\n${msg?.content}`,
                 components: [row],
-                
+                allowedMentions: { parse: ["everyone"] }
             });
             interaction.reply({
                 content: `Reaction Role message sent to ${channel}.`,
