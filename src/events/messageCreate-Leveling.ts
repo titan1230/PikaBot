@@ -10,7 +10,7 @@ const event: BotEvent = {
     execute: async (message: Message) => {
         if (message.author.bot || !message.inGuild() || cooldown.has(message.author.id)) return;
 
-        const blacklistChannel: string[] = ["712590955835949089", ];
+        const blacklistChannel: string[] = ["1178182921832640572", ];
         const blackListCategory: string[] = ["709396426509123644", "709354498568618015"];
 
         if (blacklistChannel.includes(message.channel.id)) return;
