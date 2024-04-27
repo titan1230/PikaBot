@@ -28,10 +28,10 @@ const command : Command = {
 
         const embed = new EmbedBuilder().setDescription("```\nDo you want to ban" + target.user.tag + "?\nReason: "+ reason +"\n```").setColor("Red").setTimestamp();
 
-        await message.channel.send({ embeds:[embed], components: [row]});
+        const sent = await message.channel.send({ embeds:[embed], components: [row]});
 
         const filter = (i:any) => i.user.id === message.author.id;
-        const collector = message.channel.createMessageComponentCollector({ filter, time: 15000, max: 1, componentType: ComponentType.Button });
+        const collector = sent.createMessageComponentCollector({ filter, time: 15000, max: 1, componentType: ComponentType.Button });
 
         collector.on("collect", async (i:any) => {
             const id = i.customId;
@@ -40,15 +40,19 @@ const command : Command = {
                 await i.deferUpdate()
                 await target!.ban({ reason: reason})
                 await message.channel.send({ embeds: [new EmbedBuilder().setDescription(`\`\`\`\nBanned ${target!.user.tag}\nReason: ${reason}\`\`\``).setColor("Red").setTimestamp()]});
+                
+                try {
+                await target.send({ embeds: [new EmbedBuilder().setDescription(`\`\`\`\nYou have been banned from ${message.guild!.name}\nReason: ${reason}\`\`\``).setColor("Red").setTimestamp()]});
+                } catch (e) {}
                 no_btn.setDisabled(true);
                 yes_btn.setDisabled(true);
                 return
             }
 
             if (id === "no"){
-                await i.deferUpdate()
-                await message.channel.send('Command canceled');
-                return
+                await i.deferUpdate();
+                await sent.edit({ content: "Command Cancelled", components: [] });
+                return;
             }
         });
     },
