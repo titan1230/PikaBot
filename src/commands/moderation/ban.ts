@@ -42,7 +42,7 @@ const command : Command = {
                 await message.channel.send({ embeds: [new EmbedBuilder().setDescription(`\`\`\`\nBanned ${target!.user.tag}\nReason: ${reason}\`\`\``).setColor("Red").setTimestamp()]});
                 
                 try {
-                await target.send({ embeds: [new EmbedBuilder().setDescription(`\`\`\`\nYou have been banned from ${message.guild!.name}\nReason: ${reason}\`\`\``).setColor("Red").setTimestamp()]});
+                await target?.send({ embeds: [new EmbedBuilder().setDescription(`\`\`\`\nYou have been banned from ${message.guild!.name}\nReason: ${reason}\`\`\``).setColor("Red").setTimestamp()]});
                 } catch (e) {}
                 no_btn.setDisabled(true);
                 yes_btn.setDisabled(true);
