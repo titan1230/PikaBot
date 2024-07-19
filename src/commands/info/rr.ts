@@ -161,6 +161,7 @@ const command: Command = {
         const s4 = await message.channel.send({ content: "d", allowedMentions: {parse: ["everyone", "roles"]}});
         const s5 = await message.channel.send({ content: "e", allowedMentions: {parse: ["everyone", "roles"]}});
         const s6 = await message.channel.send({ content: "f", allowedMentions: {parse: ["everyone", "roles"]}});
+        // const s7 = await message.channel.send({ content: "g", allowedMentions: {parse: ["everyone", "roles"]}});
         
         await s1.edit({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Gender**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨♂️・ <@&709329115009777716>\n> ୨♀️・ <@&709329063034224661>\n> ୨🤐・ <@&709612295482900511>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [GenderRow] , allowedMentions: {parse: ["everyone", "roles"]} });
         await s2.edit({ content: nice_thing + "\n\n||@everyone||\n╭・˚ ₊ ︵・꒰**Devices**・ෆ꒱︵︵ ๑ ⊹﹒︵\n> ୨🖥・ <@&710012053657485405>\n> ୨💻・ <@&710012099652354067>\n> ୨📱・ <@&710012171748245555>\n₊‧ʚ・︵︵ ₊˚๑🌿꒱✦ ₊ ︵︵・₊﹆ɞ‧₊\n꒷꒦︶︶︶꒷꒦‧ ₊˚・", components: [deviceRow] , allowedMentions: {parse: ["everyone", "roles"]} });
