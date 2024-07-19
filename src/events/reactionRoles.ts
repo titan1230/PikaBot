@@ -234,6 +234,28 @@ const event: BotEvent = {
                 return;
             }
 
+            if (id == "free-shit") {
+                const role = interaction.guild.roles.cache.find(
+                    (role) => role.id === "1263809954897334332"
+                );
+
+                if (interaction.member.roles.cache.get("1263809954897334332")) {
+                    interaction.member.roles.remove(role!);
+                    await interaction.reply({
+                        content: `Removed \`${role?.name}\``,
+                        ephemeral: true,
+                    });
+                    return;
+                }
+
+                interaction.member.roles.add(role!);
+                await interaction.reply({
+                    content: `Added role \`${role?.name}\``,
+                    ephemeral: true,
+                });
+                return;
+            }
+
             //Giveaways
             if (id === "myuu-give") {
                 const role = interaction.guild.roles.cache.find(
@@ -279,27 +301,6 @@ const event: BotEvent = {
                 return;
             }
 
-            if (id === "pk2-give") {
-                const role = interaction.guild.roles.cache.find(
-                    (role) => role.id === "1171725338108244020"
-                );
-
-                if (interaction.member.roles.cache.get("1171725338108244020")) {
-                    interaction.member.roles.remove(role!);
-                    await interaction.reply({
-                        content: `Removed \`${role?.name}\``,
-                        ephemeral: true,
-                    });
-                    return;
-                }
-
-                interaction.member.roles.add(role!);
-                await interaction.reply({
-                    content: `Added role \`${role?.name}\``,
-                    ephemeral: true,
-                });
-                return;
-            }
 
             //Events
             if (id === "myuu-eve") {
@@ -346,27 +347,6 @@ const event: BotEvent = {
                 return;
             }
 
-            if (id === "pk2-eve") {
-                const role = interaction.guild.roles.cache.find(
-                    (role) => role.id === "1171738148510900234"
-                );
-
-                if (interaction.member.roles.cache.get("1171738148510900234")) {
-                    interaction.member.roles.remove(role!);
-                    await interaction.reply({
-                        content: `Removed \`${role?.name}\``,
-                        ephemeral: true,
-                    });
-                    return;
-                }
-
-                interaction.member.roles.add(role!);
-                await interaction.reply({
-                    content: `Added role \`${role?.name}\``,
-                    ephemeral: true,
-                });
-                return;
-            }
 
             if (id === "raffle") {
                 const role = interaction.guild.roles.cache.find(
@@ -457,28 +437,6 @@ const event: BotEvent = {
                 return;
             }
 
-            if (id === "pk2-player") {
-                const role = interaction.guild.roles.cache.find(
-                    (role) => role.id === "1172450283054452756"
-                );
-
-                if (interaction.member.roles.cache.get("1172450283054452756")) {
-                    interaction.member.roles.remove(role!);
-                    await interaction.reply({
-                        content: `Removed \`${role?.name}\``,
-                        ephemeral: true,
-                    });
-                    return;
-                }
-
-                interaction.member.roles.add(role!);
-                await interaction.reply({
-                    content: `Added role \`${role?.name}\``,
-                    ephemeral: true,
-                });
-                return;
-            }
-
             // POKEMON BOT ROLES
             if (id === "raider") {
                 const role = interaction.guild.roles.cache.find(
@@ -546,50 +504,6 @@ const event: BotEvent = {
                 return;
             }
 
-            // POKETWO ROLES
-            if (id === "pk2-redeem") {
-                const role = interaction.guild.roles.cache.find(
-                    (role) => role.id === "1173909386058534993"
-                );
-
-                if (interaction.member.roles.cache.get("1173909386058534993")) {
-                    interaction.member.roles.remove(role!);
-                    await interaction.reply({
-                        content: `Removed \`${role?.name}\``,
-                        ephemeral: true,
-                    });
-                    return;
-                }
-
-                interaction.member.roles.add(role!);
-                await interaction.reply({
-                    content: `Added role \`${role?.name}\``,
-                    ephemeral: true,
-                });
-                return;
-            }
-
-            if (id === "pk2-incense") {
-                const role = interaction.guild.roles.cache.find(
-                    (role) => role.id === "1173909345726119976"
-                );
-
-                if (interaction.member.roles.cache.get("1173909345726119976")) {
-                    interaction.member.roles.remove(role!);
-                    await interaction.reply({
-                        content: `Removed \`${role?.name}\``,
-                        ephemeral: true,
-                    });
-                    return;
-                }
-
-                interaction.member.roles.add(role!);
-                await interaction.reply({
-                    content: `Added role \`${role?.name}\``,
-                    ephemeral: true,
-                });
-                return;
-            }
 
             // QUICK GIVEAWAY
             if (id === "quick-myuu") {
@@ -620,28 +534,6 @@ const event: BotEvent = {
                 );
 
                 if (interaction.member.roles.cache.get("1192498310553014343")) {
-                    interaction.member.roles.remove(role!);
-                    await interaction.reply({
-                        content: `Removed \`${role?.name}\``,
-                        ephemeral: true,
-                    });
-                    return;
-                }
-
-                interaction.member.roles.add(role!);
-                await interaction.reply({
-                    content: `Added role \`${role?.name}\``,
-                    ephemeral: true,
-                });
-                return;
-            }
-
-            if (id === "quick-pk2") {
-                const role = interaction.guild.roles.cache.find(
-                    (role) => role.id === "1192498280265961605"
-                );
-
-                if (interaction.member.roles.cache.get("1192498280265961605")) {
                     interaction.member.roles.remove(role!);
                     await interaction.reply({
                         content: `Removed \`${role?.name}\``,
